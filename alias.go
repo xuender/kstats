@@ -26,3 +26,28 @@ func MedianAbsoluteDeviation[F constraints.Float](floats ...F) F {
 func StandardDeviation[F constraints.Float](floats ...F) F {
 	return StandardDeviationPopulation(floats...)
 }
+
+// Pearson returns the Pearson product-moment correlation coefficient between two variables.
+func Pearson[F constraints.Float](floats1, floats2 []F) F {
+	return Correlation(floats1, floats2)
+}
+
+// VarP is a shortcut to PopulationVariance.
+func VarP[F constraints.Float](floats ...F) F {
+	return PopulationVariance(floats...)
+}
+
+// VarS is a shortcut to SampleVariance.
+func VarS[F constraints.Float](floats ...F) F {
+	return SampleVariance(floats...)
+}
+
+// StdDevP is a shortcut to StandardDeviationPopulation.
+func StdDevP[F constraints.Float](floats ...F) F {
+	return StandardDeviationPopulation(floats...)
+}
+
+// StdDevS is a shortcut to StandardDeviationSample.
+func StdDevS[F constraints.Float](floats ...F) F {
+	return StandardDeviationSample(floats...)
+}
