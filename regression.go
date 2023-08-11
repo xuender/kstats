@@ -5,40 +5,41 @@ import (
 )
 
 // Series is a container for a series of data.
-type Series[N Number] []Coordinate[N]
+type Series[N Number, F Number] []Coordinate[N, F]
 
 // Coordinate holds the data in a series.
-type Coordinate[N Number] struct {
-	X, Y N
+type Coordinate[N Number, F Number] struct {
+	X N
+	Y F
 }
 
 // LinearRegression returns the least squares linear regression on data series.
-func LinearRegression[N Number](series Series[N]) Series[float64] {
+func LinearRegression[N, F Number](series Series[N, F]) Series[N, float64] {
 	length := len(series)
 	if length == 0 {
 		return nil
 	}
 
-	var sum [5]N
+	var sum [5]float64
 
 	for _, coo := range series {
-		sum[0] += coo.X
-		sum[1] += coo.Y
-		sum[2] += coo.X * coo.X
-		sum[3] += coo.X * coo.Y
-		sum[4] += coo.Y * coo.Y
+		sum[0] += float64(coo.X)
+		sum[1] += float64(coo.Y)
+		sum[2] += float64(coo.X * coo.X)
+		sum[3] += float64(coo.X) * float64(coo.Y)
+		sum[4] += float64(coo.Y * coo.Y)
 	}
 
 	var (
 		float       = float64(length)
-		gradient    = (float*float64(sum[3]) - float64(sum[0]*sum[1])) / (float*float64(sum[2]) - float64(sum[0]*sum[0]))
-		intercept   = (float64(sum[1]) / float) - (gradient * float64(sum[0]) / float)
-		regressions = make([]Coordinate[float64], length)
+		gradient    = (float*sum[3] - sum[0]*sum[1]) / (float*sum[2] - sum[0]*sum[0])
+		intercept   = (sum[1] / float) - (gradient * sum[0] / float)
+		regressions = make([]Coordinate[N, float64], length)
 	)
 
 	for i, coord := range series {
-		regressions[i] = Coordinate[float64]{
-			X: float64(coord.X),
+		regressions[i] = Coordinate[N, float64]{
+			X: coord.X,
 			Y: float64(coord.X)*gradient + intercept,
 		}
 	}
@@ -47,7 +48,7 @@ func LinearRegression[N Number](series Series[N]) Series[float64] {
 }
 
 // ExponentialRegression returns an exponential regression on data series.
-func ExponentialRegression[N Number](series Series[N]) Series[float64] {
+func ExponentialRegression[N, F Number](series Series[N, F]) Series[N, float64] {
 	length := len(series)
 	if length == 0 {
 		return nil
@@ -62,22 +63,22 @@ func ExponentialRegression[N Number](series Series[N]) Series[float64] {
 
 		sum[0] += float64(coord.X)
 		sum[1] += float64(coord.Y)
-		sum[2] += float64(coord.X * coord.X * coord.Y)
+		sum[2] += float64(coord.X*coord.X) * float64(coord.Y)
 		sum[3] += float64(coord.Y) * Log(float64(coord.Y))
-		sum[4] += float64(coord.X*coord.Y) * Log(float64(coord.Y))
-		sum[5] += float64(coord.X * coord.Y)
+		sum[4] += float64(coord.X) * float64(coord.Y) * Log(float64(coord.Y))
+		sum[5] += float64(coord.X) * float64(coord.Y)
 	}
 
 	var (
 		denominator = (sum[1]*sum[2] - sum[5]*sum[5])
 		left        = Pow(math.E, (sum[2]*sum[3]-sum[5]*sum[4])/denominator)
 		right       = (sum[1]*sum[4] - sum[5]*sum[3]) / denominator
-		regressions = make([]Coordinate[float64], length)
+		regressions = make([]Coordinate[N, float64], length)
 	)
 
 	for i, coord := range series {
-		regressions[i] = Coordinate[float64]{
-			X: float64(coord.X),
+		regressions[i] = Coordinate[N, float64]{
+			X: coord.X,
 			Y: left * Exp(right*float64(coord.X)),
 		}
 	}
@@ -86,7 +87,7 @@ func ExponentialRegression[N Number](series Series[N]) Series[float64] {
 }
 
 // LogarithmicRegression returns an logarithmic regression on data series.
-func LogarithmicRegression[N Number](series Series[N]) Series[float64] {
+func LogarithmicRegression[N, F Number](series Series[N, F]) Series[N, float64] {
 	length := len(series)
 	if length == 0 {
 		return nil
@@ -105,12 +106,12 @@ func LogarithmicRegression[N Number](series Series[N]) Series[float64] {
 		float       = float64(length)
 		right       = (float*sum[1] - sum[2]*sum[0]) / (float*sum[3] - sum[0]*sum[0])
 		left        = (sum[2] - right*sum[0]) / float
-		regressions = make([]Coordinate[float64], length)
+		regressions = make([]Coordinate[N, float64], length)
 	)
 
 	for i, coord := range series {
-		regressions[i] = Coordinate[float64]{
-			X: float64(coord.X),
+		regressions[i] = Coordinate[N, float64]{
+			X: coord.X,
 			Y: left + right*Log(float64(coord.X)),
 		}
 	}

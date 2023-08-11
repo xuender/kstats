@@ -51,3 +51,18 @@ func StdDevP[F constraints.Float](floats ...F) F {
 func StdDevS[F constraints.Float](floats ...F) F {
 	return StandardDeviationSample(floats...)
 }
+
+// LinReg is a shortcut to LinearRegression.
+func LinReg[N, F Number](s []Coordinate[N, F]) []Coordinate[N, float64] {
+	return LinearRegression(s)
+}
+
+// ExpReg is a shortcut to ExponentialRegression.
+func ExpReg[N, F Number](s []Coordinate[N, F]) []Coordinate[N, float64] {
+	return ExponentialRegression(s)
+}
+
+// LogReg is a shortcut to LogarithmicRegression.
+func LogReg[N, F Number](s []Coordinate[N, F]) []Coordinate[N, float64] {
+	return LogarithmicRegression(s)
+}

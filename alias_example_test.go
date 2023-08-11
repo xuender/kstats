@@ -87,3 +87,46 @@ func ExampleStdDevS() {
 	// Output:
 	// 1
 }
+
+func ExampleLinReg() {
+	data := []kstats.Coordinate[int, int]{
+		{1, 2},
+		{2, 3},
+		{3, 3},
+	}
+
+	fmt.Println(kstats.LinReg(data))
+
+	// Output:
+	// [{1 2.1666666666666665} {2 2.6666666666666665} {3 3.1666666666666665}]
+}
+
+func ExampleExpReg() {
+	data := []kstats.Coordinate[int, float64]{
+		{1, 2.3},
+		{2, 3.3},
+		{3, 3.7},
+		{4, 4.3},
+		{5, 5.3},
+	}
+
+	fmt.Println(kstats.ExpReg(data))
+
+	// Output:
+	// [{1 2.5150181024736638} {2 3.032084111136781} {3 3.6554544271334493} {4 4.406984298281804} {5 5.313022222665875}]
+}
+
+func ExampleLogReg() {
+	data := []kstats.Coordinate[int, float64]{
+		{1, 2.3},
+		{2, 3.3},
+		{3, 3.7},
+		{4, 4.3},
+		{5, 5.3},
+	}
+
+	fmt.Println(kstats.LogReg(data))
+
+	// Output:
+	// [{1 2.1520822363811702} {2 3.3305559222492214} {3 4.019918836568674} {4 4.509029608117273} {5 4.888413396683663}]
+}
