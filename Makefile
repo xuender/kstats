@@ -1,7 +1,3 @@
-PACKAGE = github.com/xuender/stat
-VERSION = $(shell git describe --tags)
-BUILD_TIME = $(shell date +%F' '%T)
-
 default: lint test
 
 tools:
