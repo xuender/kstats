@@ -1,14 +1,14 @@
-package stat_test
+package kstats_test
 
 import (
 	"fmt"
 
-	"github.com/xuender/stat"
+	"github.com/xuender/kstats"
 )
 
 func ExampleMin() {
-	fmt.Println(stat.Min(9, 1, 2, 3, 4))
-	fmt.Println(stat.Min([]int{}...))
+	fmt.Println(kstats.Min(9, 1, 2, 3, 4))
+	fmt.Println(kstats.Min([]int{}...))
 
 	// Output:
 	// 1

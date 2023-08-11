@@ -1,16 +1,12 @@
-package stat
+package kstats
 
 import "golang.org/x/exp/constraints"
 
 // Mean returns the average of numbers.
 func Mean[N Number](numbers ...N) N {
-	var (
-		zero   N
-		length = len(numbers)
-	)
-
+	length := len(numbers)
 	if length == 0 {
-		return zero
+		return Empty[N]()
 	}
 
 	return Sum[N](numbers...) / N(length)
@@ -18,13 +14,9 @@ func Mean[N Number](numbers ...N) N {
 
 // GeometricMean returns the geometric mean for floats.
 func GeometricMean[F constraints.Float](floats ...F) F {
-	var (
-		zero   F
-		length = len(floats)
-	)
-
+	length := len(floats)
 	if length == 0 {
-		return zero
+		return Empty[F]()
 	}
 
 	var sum F
@@ -44,20 +36,16 @@ func GeometricMean[F constraints.Float](floats ...F) F {
 
 // HarmonicMean return the harmonic mean for floats.
 func HarmonicMean[F constraints.Float](floats ...F) F {
-	var (
-		zero   F
-		length = len(floats)
-	)
-
+	length := len(floats)
 	if length == 0 {
-		return zero
+		return Empty[F]()
 	}
 
 	var sum F
 
 	for _, num := range floats {
 		if num <= 0 {
-			return zero
+			return Empty[F]()
 		}
 
 		sum += (1 / num)

@@ -1,15 +1,11 @@
-package stat
+package kstats
 
 // Median return the median elem of ordereds.
 func Median[O Number](ordereds ...O) O {
-	var (
-		median O
-		length = len(ordereds)
-	)
-
+	length := len(ordereds)
 	switch length {
 	case 0:
-		return median
+		return Empty[O]()
 	case 1:
 		return ordereds[0]
 	default:

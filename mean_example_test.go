@@ -1,14 +1,14 @@
-package stat_test
+package kstats_test
 
 import (
 	"fmt"
 
-	"github.com/xuender/stat"
+	"github.com/xuender/kstats"
 )
 
 func ExampleMean() {
-	fmt.Println(stat.Mean(1, 2, 3, 6))
-	fmt.Println(stat.Mean([]int{}...))
+	fmt.Println(kstats.Mean(1, 2, 3, 6))
+	fmt.Println(kstats.Mean([]int{}...))
 
 	// Output:
 	// 3
@@ -16,8 +16,8 @@ func ExampleMean() {
 }
 
 func ExampleGeometricMean() {
-	fmt.Println(stat.GeometricMean(2.0, 18.0))
-	fmt.Println(stat.GeometricMean([]float32{}...))
+	fmt.Println(kstats.GeometricMean(2.0, 18.0))
+	fmt.Println(kstats.GeometricMean([]float32{}...))
 
 	// Output:
 	// 6
@@ -25,9 +25,9 @@ func ExampleGeometricMean() {
 }
 
 func ExampleHarmonicMean() {
-	fmt.Println(stat.Round(stat.HarmonicMean(1.0, 2.0, 3.0, 4.0, 5.0), 2))
-	fmt.Println(stat.HarmonicMean([]float32{}...))
-	fmt.Println(stat.Round(stat.HarmonicMean(0.0), 2))
+	fmt.Println(kstats.Round(kstats.HarmonicMean(1.0, 2.0, 3.0, 4.0, 5.0), 2))
+	fmt.Println(kstats.HarmonicMean([]float32{}...))
+	fmt.Println(kstats.Round(kstats.HarmonicMean(0.0), 2))
 
 	// Output:
 	// 2.19

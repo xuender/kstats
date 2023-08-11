@@ -1,4 +1,4 @@
-package stat
+package kstats
 
 import (
 	"golang.org/x/exp/constraints"

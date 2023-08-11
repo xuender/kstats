@@ -1,16 +1,16 @@
-package stat_test
+package kstats_test
 
 import (
 	"fmt"
 
-	"github.com/xuender/stat"
+	"github.com/xuender/kstats"
 )
 
-func ExampleMax() {
-	fmt.Println(stat.Max(9.1, 1.0, 2.2, 30.2, 4.0))
-	fmt.Println(stat.Max([]int{}...))
+func ExamplePow() {
+	fmt.Println(kstats.Pow(2, 3))
+	fmt.Println(kstats.Pow(4.0, 0.5))
 
 	// Output:
-	// 30.2
-	// 0
+	// 8
+	// 2
 }

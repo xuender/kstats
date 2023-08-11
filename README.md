@@ -1,15 +1,11 @@
-# stat
+# kStats
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/xuender/stat)](https://goreportcard.com/report/github.com/xuender/stat)
+[![Go Report Card](https://goreportcard.com/badge/github.com/xuender/kstats)](https://goreportcard.com/report/github.com/xuender/kstats)
 
-## Install
-
-```shell
-go install github.com/xuender/stat@latest
-```
+Golang statistics library package that supports v1.18+.
 
 ## License
 
 © ender, 2023~time.Now
 
-[MIT LICENSE](https://github.com/xuender/stat/blob/master/LICENSE)
+[MIT LICENSE](https://github.com/xuender/kstats/blob/master/LICENSE)

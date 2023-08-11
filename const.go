@@ -1,4 +1,4 @@
-package stat
+package kstats
 
 const (
 	_ten  = 10
