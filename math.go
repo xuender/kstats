@@ -6,8 +6,8 @@ import (
 	"golang.org/x/exp/constraints"
 )
 
-func Abs[F constraints.Float](float F) F {
-	return F(math.Abs(float64(float)))
+func Abs[N Number](float N) N {
+	return N(math.Abs(float64(float)))
 }
 
 func Pow[N Number](x, y N) N {

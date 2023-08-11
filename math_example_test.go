@@ -14,3 +14,10 @@ func ExamplePow() {
 	// 8
 	// 2
 }
+
+func ExampleSqrt() {
+	fmt.Println(kstats.Sqrt(9.0))
+
+	// Output:
+	// 3
+}
