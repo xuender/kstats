@@ -28,7 +28,9 @@ jobs:
       - name: Coverage
         run: go test ./... -gcflags=all=-l -race -coverprofile=coverage.txt -covermode=atomic
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2.0.2
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           file: ./coverage.txt
           flags: unittests
